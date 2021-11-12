@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Success{% endblock %}
+{% block favicon %}{% endblock %}
+{% block head %}{% endblock %}
+
+{% block body %}
+    <div class="container emp-profile">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h2>
+                            Success
+                        </h2>
+                        <h6>
+                            You have transfered {{ (amount / 100)|format_currency('EUR', locale='de') }} to {{ to }}.
+                        </h6>
+                        Back to <a href="{{ path('app_homepage') }}">Homepage</a> or <a href="{{ path('app_profile') }}">Profile</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

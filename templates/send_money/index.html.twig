@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Send Money{% endblock %}
+{% block favicon %}💸{% endblock %}
+{% block head %}
+    <style>
+        .form-card input:focus,
+        .form-card textarea:focus {
+            -moz-box-shadow: 0px 0px 0px 1.5px skyblue !important;
+            -webkit-box-shadow: 0px 0px 0px 1.5px skyblue !important;
+            box-shadow: 0px 0px 0px 1.5px skyblue !important;
+            font-weight: bold;
+            border: 1px solid skyblue;
+            outline-width: 0
+        }
+
+        input.btn-success {
+            height: 50px;
+            color: #ffffff;
+            opacity: 0.9
+        }
+
+        .input-group {
+            position: relative;
+            width: 100%;
+            overflow: hidden
+        }
+
+        .input-group input {
+            position: relative;
+            height: 90px;
+            left: 0;
+            right: 0;
+            width: 70%;
+            border-radius: 6px;
+            padding-top: 30px;
+            padding-left: 25px
+        }
+
+        .input-group label {
+            position: absolute;
+            height: 24px;
+            background: none;
+            border-radius: 6px;
+            line-height: 48px;
+            font-size: 15px;
+            color: gray;
+            width: 100%;
+            font-weight: 100;
+            padding-left: 25px
+        }
+
+        input:focus + label {
+            color: #1E88E5
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="container emp-profile">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <div class="profile-head">
+                        <h5 style="font-size: 3rem">
+                            {{ app.user.username }}
+                        </h5>
+                        <h6>
+                            A PooPal enjoyer
+                        </h6>
+                        <p class="proile-rating">BALANCE &nbsp&nbsp<span
+                                    style="font-size: 2rem">{{ (app.user.balance / 100)|format_currency('EUR', locale='de') }}</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        <div class="input-group"><input required type="number" step="0.01" min="0" max="{{ app.user.balance/100 }}" name="amount" pattern="^\d*(\.\d{0,2})?$" id="ben-ma" placeholder="0,00" onblur="this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'grey'">
+                            <label for="ben-ma">MONEY AMOUNT</label>
+
+                        </div>
+                    </div><br />
+                    <div class="col-md-12">
+                        <div class="input-group"><input required type="text" name="recipient" id="ben-nm" value="{{ beneficiary }}"
+                                                        placeholder="PooPaler123">
+                            <label for="ben-nm">BENEFICIARY NAME</label>&nbsp&nbsp&nbsp
+                            <button style="white-space: initial; font-size: 40px" class="btn btn-dark" type="submit" value="Send Money">&nbsp💰👋&nbsp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+

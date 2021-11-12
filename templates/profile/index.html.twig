@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+{% block favicon %}💎{% endblock %}
+{% block head %}{% endblock %}
+
+{% block body %}
+    <div class="container emp-profile">
+        <form method="post" action="{{ path('app_profile_edit') }}">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <div class="profile-img">
+                           <span style="font-size: 130px">😃</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h5 style="font-size: 3rem">
+                            {{ app.user.username }}
+                        </h5>
+                        <h6>
+                            A PooPal enjoyer
+                        </h6>
+                        <p class="proile-rating">BALANCE &nbsp&nbsp<span style="font-size: 2rem">{{ (app.user.balance / 100)|format_currency('EUR', locale='de') }}</span></p>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="true">About</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-work">
+                        <p>TRANSACTIONS</p>
+                        {% for transaction in transactions %}
+                        <a href="{{ path('app_sendmoney') }}?beneficiary={{ transaction.toUsername }}&amount={{ transaction.amount }}">Sent {{ (transaction.amount / 100)|format_currency('EUR', locale='de') }} to {{ transaction.toUsername }}</a><br />
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Username</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ app.user.username }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Password</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>***************</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Mobile</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{% if app.user.telnumber==NULL %}Number not set{% endif %}{% if app.user.telnumber!=NULL %} +49 - {{app.user.telnumber}}{% endif %}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Currency</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>Euro</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Last seen</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ app.user.lastlogin|date('d-M-Y') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

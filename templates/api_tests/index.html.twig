@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Apitest{% endblock %}
+{% block favicon %}💎{% endblock %}
+{% block head %}{% endblock %}
+
+{% block body %}
+    <div class="container emp-profile" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+        <div class="row">
+            <div class="col-md-6">
+                Accessed from: {{ ip }} </br>
+                <form method="">
+                    <!--<div class="col-md-6">
+                        <label id="yes">api call1</label>
+                    </div>-->
+                    <div>
+                        <p><input id="yes" type="text" name="apicall" value=""/></p>
+                    </div>
+                    <div>
+                        <input type="submit" class="profile-edit-btn" style="min-width: 100px" value="send"/>
+                    </div>
+                </form>
+                </br>
+                {% if name is not empty %}Name: {{ name }}<br>{% endif %}
+                {% if from is not empty %}From: {{ from }}<br>{% endif %}
+                {% if chance is not empty %}Chance: {{ chance }}<br>{% endif %}
+            </div>
+            <div class="col-md-6">
+                <img src="{{ dog }}" style="max-height: 100%;max-width: 100%"/>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <iframe
+                            width="1000"
+                            height="1000"
+                            style="border:0"
+                            loading="lazy"
+                            allowfullscreen
+                            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyALTQH0Ivv606k2l2_LCTw0625u3xL5Yqg&q=mount everest">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

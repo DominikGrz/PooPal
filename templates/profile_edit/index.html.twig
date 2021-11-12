@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+{% block favicon %}💎{% endblock %}
+{% block head %}{% endblock %}
+
+{% block body %}
+    <div class="container emp-profile">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <div class="profile-img">
+                            <img src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
+                                 alt=""/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h5 style="font-size: 3rem">
+                            {{ app.user.username }}
+                        </h5>
+                        <h6>
+                            A PooPal enjoyer
+                        </h6>
+                        <p class="proile-rating">BALANCE &nbsp&nbsp<span
+                                    style="font-size: 2rem">{{ (app.user.balance / 100)|format_currency('EUR', locale='de') }}</span>
+                        </p>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab"
+                                   aria-controls="home" aria-selected="true">About</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Save Profile"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Username</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><input type="text" name="username" pattern="[A-Za-z]{4,16}" title="Username must be between 4 and 16 letters and A-Z" value="{{ app.user.username }}"></p>
+                                </div>
+                            </div>
+                       <!--     <div class="row">
+                                <div class="col-md-6">
+                                    <label>Password</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><input type="password" name="password" value=""></p>
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="tel">Mobile</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><input id="tel" type="tel" name="telnumber" pattern="[0-9]{10,12}" title="Mobile number must be between 10 and 12 digits." value="{% if app.user.telnumber!=NULL %}{{ app.user.telnumber }}{% endif %}">
+                                    </p>
+                                </div>
+                            </div>
+                            <input type='hidden' name='token' value='{{ csrf_token('signup') }}'/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
